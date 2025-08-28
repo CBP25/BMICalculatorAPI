@@ -4,11 +4,21 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-app.use(cors({
-  origin: 'https://webadminspy.onrender.com',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // allow if no origin (e.g. Postman) OR matches without trailing slash
+      const allowed = "https://webadminspy.onrender.com";
+      if (!origin || origin.replace(/\/$/, "") === allowed) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(express.json({ limit: '10mb' })); // dagdagan limit kasi may base64 images
 
 // ✅ Connect MongoDB
