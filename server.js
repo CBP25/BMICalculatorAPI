@@ -6,7 +6,7 @@ const cors = require('cors');
 const app = express();
 app.use(cors({
   origin: 'https://webadminspy.onrender.com/',
-  methods: ['GET', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' })); // dagdagan limit kasi may base64 images
