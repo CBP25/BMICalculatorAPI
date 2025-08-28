@@ -84,6 +84,16 @@ app.get('/api/permissions', async (req, res) => {
   }
 });
 
+// ✅ Delete by ID
+app.delete('/api/permissions/:id', async (req, res) => {
+  try {
+    await Permission.findByIdAndDelete(req.params.id);
+    res.json({ message: '✅ Permission deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // ✅ Run server
 app.listen(5000, () => console.log('🚀 Server running on port 5000'));
 
