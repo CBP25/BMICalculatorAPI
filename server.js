@@ -4,7 +4,11 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'https://webadminspy.onrender.com/',
+  methods: ['GET', 'DELETE'],
+  credentials: true
+}));
 app.use(express.json({ limit: '10mb' })); // dagdagan limit kasi may base64 images
 
 // ✅ Connect MongoDB
